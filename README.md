@@ -12,9 +12,17 @@ mtools init
 ```
 3. Add http module
 ```bash
-mtools module install -m "modulus/chi-http"
+mtools module install -m "modulus/chihttp"
 ```
-or use just `mtools module install` and select `modulus/chi-http` module in the list.
+or use just `mtools module install` and select `modulus/chihttp` module in the list.
 
+Add a module option OverrideHttpRouter to the http module constructor inside the entrypoint of your application.
 
-If you want to use middlewares for your routes, you can use `mtools module install -m "modulus/chi-http/middleware"`,
+For example, in `/cmd/conosle/main.go`
+```go
+// DO NOT Remove. It will be edited by the `mtools module create` CLI command.
+	modules := []*module.Module{
+		http.NewModule(chihttp.OverrideHttpRouter),
+...
+}
+```

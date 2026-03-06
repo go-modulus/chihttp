@@ -21,6 +21,17 @@ func NewModule() *module.Module {
 		)
 }
 
+func NewManifesto() module.Manifesto {
+	httpModule := module.NewManifesto(
+		NewModule(),
+		"github.com/go-modulus/chihttp",
+		"Chi HTTP router that is working over the base http modulus module.",
+		"1.0.0",
+	)
+
+	return httpModule
+}
+
 func init() {
 	integration.UseGochiURLParam("path", chi.URLParam)
 }

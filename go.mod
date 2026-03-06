@@ -1,4 +1,4 @@
-module github.com/go-modulus/http
+module github.com/go-modulus/chihttp
 
 go 1.26
 

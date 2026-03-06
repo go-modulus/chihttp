@@ -8,7 +8,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/go-modulus/http/middleware"
+	"github.com/go-modulus/chihttp/middleware"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -26,9 +26,11 @@ func TestNewLogger(t *testing.T) {
 
 			var buf bytes.Buffer
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					w.WriteHeader(http.StatusOK)
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						w.WriteHeader(http.StatusOK)
+					},
+				),
 			)
 
 			req := httptest.NewRequest(http.MethodGet, "/hello", nil)
@@ -47,9 +49,11 @@ func TestNewLogger(t *testing.T) {
 
 			var buf bytes.Buffer
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					w.WriteHeader(http.StatusCreated)
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						w.WriteHeader(http.StatusCreated)
+					},
+				),
 			)
 
 			handler.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(http.MethodPost, "/", nil))
@@ -66,9 +70,11 @@ func TestNewLogger(t *testing.T) {
 
 			var buf bytes.Buffer
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					_, _ = w.Write([]byte("hello"))
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						_, _ = w.Write([]byte("hello"))
+					},
+				),
 			)
 
 			handler.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(http.MethodGet, "/", nil))
@@ -85,9 +91,11 @@ func TestNewLogger(t *testing.T) {
 
 			var buf bytes.Buffer
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					w.WriteHeader(http.StatusOK)
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						w.WriteHeader(http.StatusOK)
+					},
+				),
 			)
 
 			handler.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(http.MethodGet, "/", nil))
@@ -104,9 +112,11 @@ func TestNewLogger(t *testing.T) {
 
 			var buf bytes.Buffer
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					w.WriteHeader(http.StatusOK)
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						w.WriteHeader(http.StatusOK)
+					},
+				),
 			)
 
 			handler.ServeHTTP(httptest.NewRecorder(), httptest.NewRequest(http.MethodGet, "/", nil))
@@ -124,10 +134,12 @@ func TestNewLogger(t *testing.T) {
 			var buf bytes.Buffer
 			nextCalled := false
 			handler := middleware.NewLogger(newJSONLogger(&buf))(
-				http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-					nextCalled = true
-					w.WriteHeader(http.StatusOK)
-				}),
+				http.HandlerFunc(
+					func(w http.ResponseWriter, r *http.Request) {
+						nextCalled = true
+						w.WriteHeader(http.StatusOK)
+					},
+				),
 			)
 
 			rr := httptest.NewRecorder()

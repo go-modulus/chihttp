@@ -11,7 +11,7 @@ import (
 	"time"
 
 	"github.com/c2h5oh/datasize"
-	chihttp "github.com/go-modulus/http"
+	chihttp "github.com/go-modulus/chihttp"
 	modhttp "github.com/go-modulus/modulus/http"
 	"github.com/go-modulus/modulus/http/errhttp"
 	"github.com/stretchr/testify/assert"
