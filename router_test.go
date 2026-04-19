@@ -47,7 +47,7 @@ func TestNewRouter(t *testing.T) {
 			rr := httptest.NewRecorder()
 			r.ServeHTTP(rr, httptest.NewRequest(http.MethodGet, "/does-not-exist", nil))
 
-			require.Equal(t, http.StatusBadRequest, rr.Code)
+			require.Equal(t, http.StatusNotFound, rr.Code)
 			var body ErrorsResponse
 			require.NoError(t, json.Unmarshal(rr.Body.Bytes(), &body))
 			assert.Contains(t, rr.Header().Get("Content-Type"), "application/json")
@@ -72,12 +72,12 @@ func TestNewRouter(t *testing.T) {
 			rr := httptest.NewRecorder()
 			r.ServeHTTP(rr, httptest.NewRequest(http.MethodPost, "/resource", nil))
 
-			require.Equal(t, http.StatusBadRequest, rr.Code)
+			require.Equal(t, http.StatusMethodNotAllowed, rr.Code)
 			var body ErrorsResponse
 			require.NoError(t, json.Unmarshal(rr.Body.Bytes(), &body))
 			assert.Contains(t, rr.Header().Get("Content-Type"), "application/json")
 			require.Len(t, body.Errors, 1)
-			require.Equal(t, "Method not allowed", body.Errors[0].Message)
+			require.Equal(t, "HTTP method is not allowed", body.Errors[0].Message)
 		},
 	)
 
