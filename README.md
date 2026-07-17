@@ -4,7 +4,7 @@ HTTP module for the Modulus framework. It is based on the Chi router.
 How to use:
 1. Install mtools
 ```bash
-go install github.com/go-modulus/mtools/cmd/mtools@latest
+go install github.com/go-modulus/mtools@latest
 ```
 2. Init a project
 ```bash
